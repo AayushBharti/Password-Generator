@@ -1,14 +1,12 @@
 // Handle Slider Control and Display Password Length ------------------------------------
 let lengthDisplay = document.querySelector('[lengthDisplay]');
-// console.log(lengthDisplay)
 let slider = document.querySelector('input[type=range]');
-// console.log(slider)
-
 
 function handleSlider() {
     slider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
 }
+
 //initial value
 let passwordLength = 10;
 handleSlider();
@@ -22,6 +20,7 @@ slider.addEventListener('input', (event) => {
 
 //Generate Random Letters and Number and Symbols-------------------------------------------
 
+// genarate any random no. b/w min and max(exclusive)
 function generateRandom(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -36,7 +35,7 @@ function generateRandomUppercase() {
     return String.fromCharCode(generateRandom(65, 91));
 }
 
-// Random Number 
+// generate any random no. b/w 0- 9
 function generateRandomNumber() {
     return generateRandom(1, 10);
 }
@@ -127,3 +126,106 @@ copyBtn.addEventListener("click", () => {
     if (passwordDisplay.value)
         copyContent();
 });
+
+
+
+
+
+
+
+
+// CheckBox - Handle  -----------------------------------------------------------------------
+// By Default UpperCase Checked 
+
+let checkBoxes = document.querySelectorAll("input[type=checkbox]");
+let checkCount = 0;
+
+checkBoxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', handleCheckBoxChange);
+})
+
+function handleCheckBoxChange() {
+    checkCount = 0;
+    checkBoxes.forEach((checkbox) => {
+        if (checkbox.checked)
+            checkCount++;
+    });
+
+    //special condition
+    if (passwordLength < checkCount) {
+        passwordLength = checkCount;
+        handleSlider();
+    }
+}
+
+
+
+
+// Handle generate password------------------------------------------------------------------
+
+let password = "";
+let generateBtn = document.querySelector("#generateBtn");
+// uppercase already checked
+uppercase.checked=true;
+checkCount=1;
+
+generateBtn.addEventListener('click', () => {
+    // none of the checkboxes are selected
+    if(checkCount <= 0){
+        alert('Atleast check one checkbox');
+        return;
+    }
+
+    // password-length should be >= selected no. of checkbox
+    if (passwordLength < checkCount) {
+        passwordLength = checkCount;
+        handleSlider();
+    }
+
+    // Remove Previous Password 
+    password = "";
+
+    let arrayOfCheckedFunction = [];
+
+    // add selected checkbox functions to an array
+    if (uppercase.checked) arrayOfCheckedFunction.push(generateRandomUppercase);
+    if (lowercase.checked) arrayOfCheckedFunction.push(generateRandomLowercase);
+    if (numbers.checked) arrayOfCheckedFunction.push(generateRandomNumber);
+    if (symbols.checked) arrayOfCheckedFunction.push(generateRandomSymbol);
+
+    // add the required characters - compulsory addition
+    for(let i=0; i < arrayOfCheckedFunction.length; i++){
+        password += arrayOfCheckedFunction[i]();
+    }
+
+    // adding random characters till the (password length - remaining addition)
+    for(let i = 0; i < passwordLength - arrayOfCheckedFunction.length; i++){
+        let randIndex = generateRandom(0, arrayOfCheckedFunction.length);
+        password += arrayOfCheckedFunction[randIndex]();
+    }
+
+    // shuffle the newly created pass.
+    password = shuffleArray(Array.from(password));
+    passwordDisplay.value = password;
+    // console.log('password :', password);
+
+    calcStrength();
+});
+
+
+// Shuffle the array randomly - Fisher Yates algorithm (aka Knuth) Shuffle.--------------------------
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      // find out random j
+      const j = Math.floor(Math.random() * (i + 1));
+      // swap 2 numbers
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    let str = "";
+    // array.forEach((el) => (str += el));
+    str = array.join("");
+    return str;
+}

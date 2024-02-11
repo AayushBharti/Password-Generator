@@ -56,15 +56,17 @@ function generateRandomSymbol() {
 
 // Strength Color Based on Password --------------------------------------------------------
 let indicator = document.querySelector('.indicator');
+let indicatorText = document.querySelector('.indicator-text');
 
 // Set Indicator 
-function setIndicator(color) {
+function setIndicator(color,text) {
     indicator.style.backgroundColor = color;
-    indicator.style.boxShadow = `0 0 12px 1px ${color}`;
+    indicator.style.boxShadow = `0 0 30px 1px ${color}`;
+    indicatorText.innerText=text;
 }
 
 // Default Indicator 
-setIndicator("#ccc");
+setIndicator("#ccc","");
 
 const uppercase = document.querySelector('#uppercase');
 const lowercase = document.querySelector('#lowercase');
@@ -83,15 +85,15 @@ function calcStrength() {
     if (symbols.checked) hasSymbol = true;
 
     if (hasUpper && hasLower && (hasNumber || hasSymbol) && passwordLength >= 8) {
-        setIndicator("#0f0");
+        setIndicator("#0f0","Strong");
     } else if (
         (hasLower || hasUpper) &&
         (hasNumber || hasSymbol) &&
         passwordLength >= 6
     ) {
-        setIndicator("#ff0");
+        setIndicator("#ff0","Normal");
     } else {
-        setIndicator("#f00");
+        setIndicator("#f00","Weak");
     }
 }
 
@@ -107,7 +109,6 @@ let passwordDisplay = document.querySelector("input[passwordDisplay]");
 async function copyContent() {
     try {
         await navigator.clipboard.writeText(passwordDisplay.value);
-
         copyMessage.innerText = "Copied"
     }
     catch (e) {

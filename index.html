@@ -27,8 +27,8 @@
         <div class="displayContainer">
           <input type="text" placeholder="Password" readonly passwordDisplay />
           <button class="copyBtn">
-            <span copyMessage></span>
-            <img src="./images/copy.svg" alt="copy" width="24" height="24" />
+            <span copyMessage class="copySpan"></span>
+            <img src="./assets/copy.svg" alt="copy" width="24" height="24" />
           </button>
         </div>
 
@@ -39,7 +39,7 @@
             <p lengthDisplay></p>
           </div>
 
-          <input type="range" min="1" max="20" step="1" class="slider" />
+          <input type="range" min="1" max="20" step="1" class="slider"/>
 
           <!-- Checkboxes  -->
           <div>
@@ -64,7 +64,12 @@
           <!-- Strength Container -->
           <div class="strengthContainer">
             <p>Strength</p>
-            <div class="indicator"></div>
+            <div class="indicator-box">
+              <div class="indicator-text"></div>
+              <div class="indicator"></div>
+            </div>
+            
+            
           </div>
 
           <!-- Button  -->

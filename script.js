@@ -193,19 +193,23 @@ generateBtn.addEventListener('click', () => {
     if (numbers.checked) arrayOfCheckedFunction.push(generateRandomNumber);
     if (symbols.checked) arrayOfCheckedFunction.push(generateRandomSymbol);
 
-    // add the required characters - compulsory addition
-    for(let i=0; i < arrayOfCheckedFunction.length; i++){
-        password += arrayOfCheckedFunction[i]();
-    }
+    // add the required characters - compulsory addition 
+    // for(let i=0; i < arrayOfCheckedFunction.length; i++){
+    //     password += arrayOfCheckedFunction[i]();
+    // }
 
     // adding random characters till the (password length - remaining addition)
-    for(let i = 0; i < passwordLength - arrayOfCheckedFunction.length; i++){
+    // for(let i = 0; i < passwordLength - arrayOfCheckedFunction.length; i++){
+    for(let i = 0; i < passwordLength; i++){
         let randIndex = generateRandom(0, arrayOfCheckedFunction.length);
         password += arrayOfCheckedFunction[randIndex]();
     }
 
+    //now no need to shuffle, Since we added through rand index;
+
+    
     // shuffle the newly created pass.
-    password = shuffleArray(Array.from(password));
+    // password = shuffleArray(Array.from(password)); 
     passwordDisplay.value = password;
     // console.log('password :', password);
 
@@ -213,7 +217,7 @@ generateBtn.addEventListener('click', () => {
 });
 
 
-// Shuffle the array randomly - Fisher Yates algorithm (aka Knuth) Shuffle.--------------------------
+// Shuffle the array randomly - Fisher Yates algorithm Shuffle.--------------------------
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {

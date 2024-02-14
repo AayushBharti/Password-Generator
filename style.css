@@ -73,7 +73,7 @@ body{
     line-height: 1.2;
     font-family: "Courier New", monospace;
     /* color: #00ff00; */
-    color: hsl(230, 90%, 72%);
+    color: rgb(148, 154, 247);
     opacity: 0.75;
     text-align: center;
     text-transform: uppercase;
@@ -104,7 +104,7 @@ body{
     outline: none;
     border: none;
     padding: 1.15rem 1rem;
-    color: var(--vb-blue);
+    color: rgb(148, 154, 247);
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 30px;

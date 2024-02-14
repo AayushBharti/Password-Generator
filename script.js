@@ -190,6 +190,7 @@ generateBtn.addEventListener('click', () => {
     }
 
     // Remove Previous Password 
+    passwordDisplay.value= "Preparing..."
     password = "";
 
     let arrayOfCheckedFunction = [];
@@ -217,7 +218,10 @@ generateBtn.addEventListener('click', () => {
     
     // shuffle the newly created pass.
     // password = shuffleArray(Array.from(password)); 
-    passwordDisplay.value = password;
+    setTimeout(()=>{
+        passwordDisplay.value = password;
+    },2000)
+    
     // console.log('password :', password);
 
     calcStrength();

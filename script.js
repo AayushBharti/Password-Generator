@@ -5,6 +5,9 @@ let slider = document.querySelector('input[type=range]');
 function handleSlider() {
     slider.value = passwordLength;
     lengthDisplay.innerText = passwordLength;
+    //bar color
+    slider.style.backgroundSize=((passwordLength - slider.min)*100/(slider.max-slider.min)) + "% 100%";
+    // slider.style.backgroundSize="10% 100%";
 }
 
 //initial value
@@ -74,25 +77,32 @@ const numbers = document.querySelector('#numbers');
 const symbols = document.querySelector('#symbols');
 
 function calcStrength() {
-    let hasUpper = false;
-    let hasLower = false;
-    let hasNumber = false;
-    let hasSymbol = false;
+    // let hasUpper = false;
+    // let hasLower = false;
+    // let hasNumber = false;
+    // let hasSymbol = false;
 
-    if (uppercase.checked) hasUpper = true;
-    if (lowercase.checked) hasLower = true;
-    if (numbers.checked) hasNumber = true;
-    if (symbols.checked) hasSymbol = true;
+    // if (uppercase.checked) hasUpper = true;
+    // if (lowercase.checked) hasLower = true;
+    // if (numbers.checked) hasNumber = true;
+    // if (symbols.checked) hasSymbol = true;
 
-    if (hasUpper && hasLower && (hasNumber || hasSymbol) && passwordLength >= 8) {
+    if (uppercase.checked && lowercase.checked && 
+        numbers.checked && symbols.checked && passwordLength >= 12) 
+        {
+        setIndicator("#0f0","Very Strong");
+    } else if (uppercase.checked && lowercase.checked && 
+        (numbers.checked || symbols.checked) && passwordLength >= 8) 
+    {
         setIndicator("#0f0","Strong");
     } else if (
-        (hasLower || hasUpper) &&
-        (hasNumber || hasSymbol) &&
-        passwordLength >= 6
-    ) {
+        (lowercase.checked || uppercase.checked) &&
+        (numbers.checked || symbols.checked) &&
+        passwordLength >= 6) 
+    {
         setIndicator("#ff0","Normal");
-    } else {
+    }
+     else {
         setIndicator("#f00","Weak");
     }
 }
@@ -220,11 +230,12 @@ generateBtn.addEventListener('click', () => {
     // password = shuffleArray(Array.from(password)); 
     setTimeout(()=>{
         passwordDisplay.value = password;
-    },2000)
+        calcStrength();
+    },1200)
     
     // console.log('password :', password);
 
-    calcStrength();
+    
 });
 
 

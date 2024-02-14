@@ -128,6 +128,12 @@ copyBtn.addEventListener("click", () => {
         copyContent();
 });
 
+passwordDisplay.addEventListener("click", () => {
+    if (passwordDisplay.value)
+        copyContent();
+});
+
+
 
 
 

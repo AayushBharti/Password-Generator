@@ -5,6 +5,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "League Spartan", sans-serif;
+    user-select: none;
+    
+
 }
 
 button {
@@ -13,26 +16,19 @@ button {
 }
 
 :root {
-    --dk-violet: hsl(268, 75%, 9%);
+    --dk-violet: hsla(268, 74%, 9%, 0.337);
     --lt-violet: hsl(268, 47%, 21%);
-    --lt-violet2: hsl(281, 89%, 26%);
-    --vb-violet: hsl(285, 91%, 52%);
+    --lt-violet2: hsla(281, 90%, 34%, 0.485);
+    --vb-violet: hsla(285, 89%, 36%, 0.28);
     --vb-violet2: hsl(290, 70%, 36%);
-
-    --vb-yellow: hsl(52, 100%, 62%);
-
+    --vb-blue: hsl(229, 62%, 63%);
     --pl-white: hsl(0, 0%, 100%);
-
-    --vb-cyan: hsl(176, 100%, 44%);
-    --vb-cyan2: hsl(177, 92%, 70%);
-
-    --dk-text: hsl(198, 20%, 13%);
 }
 
 #wrapper {
     height: 100vh;
     width: 100vw;
-    max-width: 1080px;
+    max-width: 1500px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -40,16 +36,33 @@ button {
     flex-direction: column;
     /* display: grid;
   place-items: center; */
-    overflow: hidden auto;
+    overflow: hidden hidden;
+    position: relative;
 }
+
 
 body{
-    background: linear-gradient(231deg,
+    /* background: linear-gradient(231deg,
     rgba(22, 6, 40, 1) 0%,
     rgba(52, 28, 79, 1) 50%,
-    rgba(88, 7, 125, 1) 100%);
+    rgba(88, 7, 125, 1) 100%); */
+    background-color: rgb(0, 0, 0);
+    overflow-X: hidden;
 }
 
+.Bg-video{
+    background-position: center;
+    background-size: cover;
+    /* height: 100%;
+    width: 100%; */
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 1200px;
+    scale: 1;
+}
 
 .container {
     width: 90%;
@@ -58,19 +71,27 @@ body{
 
 .heading {
     line-height: 1.2;
-    color: var(--pl-white);
+    font-family: "Courier New", monospace;
+    /* color: #00ff00; */
+    color: hsl(230, 90%, 72%);
     opacity: 0.75;
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
+    background-color: rgba(0, 0, 0, 0.063);
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    padding: 0.3em 1em;
 }
 
 .displayContainer {
     position: relative;
     background-color: var(--dk-violet);
+    backdrop-filter: blur(10px);
     border-radius: 1rem;
     border-bottom: 0.35rem solid var(--lt-violet2);
-    padding-top: 0.35rem;
+    /* padding-top: 0.35rem; */
+    padding: 0 0.7rem;
     margin: 1rem 0;
     display: flex;
     justify-content: center;
@@ -83,16 +104,17 @@ body{
     outline: none;
     border: none;
     padding: 1.15rem 1rem;
-    color: var(--vb-yellow);
+    color: var(--vb-blue);
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 30px;
     letter-spacing: 1px;
-    padding-right: 3.25rem;
+    /* padding-right: 3.25rem; */
+    cursor: pointer;
 }
 
 .displayContainer input::placeholder {
-    color: var(--vb-yellow);
+    color: var(--vb-blue);
     text-transform: uppercase;
     opacity: 0.65;
     font-size: 1.5rem;
@@ -115,7 +137,8 @@ body{
 
 .copySpan{
     position: absolute;
-    color: var(--vb-yellow);
+    color: rgba(255, 255, 255, 0.83);
+    opacity: 0.85;
     font-weight: 800;
     background-color: var(--vb-violet2);
     top: -35px;
@@ -140,7 +163,10 @@ body{
 .inputContainer {
     background-color: var(--dk-violet);
     border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    /* border: 1px solid var(--lt-violet2); */
     border-bottom: 0.35rem solid var(--lt-violet2);
+
     padding: 2rem;
     width: 100%;
     /* color: var(--pl-white); */
@@ -155,11 +181,12 @@ body{
 
 .lengthContainer p:nth-child(1) {
     color: var(--pl-white);
+    opacity: 0.8;
     font-size: 1.5rem;
 }
 
 .lengthContainer p:nth-child(2) {
-    color: var(--vb-yellow);
+    color: var(--vb-blue);
     font-size: 1.5rem;
     font-weight: 600;
 }
@@ -183,7 +210,7 @@ body{
 }
 
 .slider:focus {
-    outline: 3px solid var(--vb-yellow);
+    outline: 3px solid hsl(230, 39%, 29%);
 }
 
 .slider::-webkit-slider-thumb {
@@ -191,8 +218,8 @@ body{
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background: var(--vb-yellow);
-    box-shadow: 0px 0px 20px 0px rgba(255, 229, 61, 0.5);
+    background: hsl(230, 39%, 48%);
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
     transition: all 100ms ease-in;
     cursor: pointer;
     /* margin-top: -3px; */
@@ -201,9 +228,9 @@ body{
 }
 
 .slider::-webkit-slider-thumb:hover {
-    outline: 2px solid var(--vb-yellow);
-    background-color: var(--dk-violet);
-    box-shadow: 0px 0px 25px 5px rgba(255, 229, 61, 0.8);
+    outline: 2px solid var(--vb-blue);
+    background-color: black;
+    box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.8);
 }
 
 /* Checkboxes Start */
@@ -212,12 +239,15 @@ body{
     display: flex;
     align-items: center;
     gap: 0 1rem;
+    cursor: pointer;
 }
 
 .check label {
     text-transform: capitalize;
     color: var(--pl-white);
+    opacity: 0.8;
     font-size: 1.25rem;
+    cursor: pointer;
     letter-spacing: 0.75px;
 }
 
@@ -225,20 +255,20 @@ body{
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid var(--vb-cyan);
+    border: 3px solid rgb(2, 109, 109);
     cursor: pointer;
     position: relative;
     border-radius: 0.35rem;
 }
 
 .check input:checked {
-    background-color: var(--vb-cyan);
+    background-color: rgb(2, 109, 109);
 }
 
 .check input:checked::before {
     position: absolute;
     content: "✔";
-    color: var(--dk-text);
+    color: white;
     font-size: 1.05rem;
     font-weight: 600;
     left: 50%;
@@ -259,7 +289,8 @@ body{
 }
 
 .strengthContainer p {
-    color: var(--pl-white);
+    color: white;
+    opacity: 0.9;
     font-size: 1.5rem;
 }
 
@@ -271,7 +302,8 @@ body{
 }
 
 .indicator-text{
-    color: var(--pl-white);
+    color: white;
+    opacity: 0.8;
     font-size: 1.1rem;
     font-weight: 800;
     letter-spacing: 3px;
@@ -282,6 +314,7 @@ body{
     width: 1.5em;
     height: 1.5rem;
     border-radius: 50%;
+    opacity: 0.8;
 }
 
 /* Strength Container End  */
@@ -292,10 +325,11 @@ body{
     width: 100%;
     padding: 1rem 0;
     border-radius: 0.75rem;
-    border-bottom: 0.35rem solid var(--vb-yellow);
+    border-bottom: 0.35rem solid var(--vb-blue);
+    
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--vb-yellow);
+    color: var(--vb-blue);
     font-weight: 600;
     font-size: 1.25rem;
     text-align: center;
@@ -308,8 +342,7 @@ body{
 
 #generateBtn:active{
     translate: 0 -2px;
-    border: none;
-
+    scale: 0.9;
 }
 
 /* Generate Button Ends 
